@@ -13,8 +13,46 @@
     <title>Tasky</title>
 </head>
 <body>
-
-
+<!--modal-->
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="exampleModalLabel">Add New Task</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="imageurl" class="form-label">Image URL</label>
+            <input type="url" class="form-control" id="imageurl" placeholder="http://images.hello.com/hello.jpg">
+          </div>
+          <div class="mb-3">
+            <label for="tasktitle" class="form-label">Task Title</label>
+            <input type="text" class="form-control" id="tasktitle" placeholder="Task Title">
+          </div>
+          <div class="mb-3">
+            <label for="tasktype" class="form-label">Task Type</label>
+            <input type="text" class="form-control" id="tasktype" placeholder="Task Type">
+          </div>
+          <div class="mb-3">
+            <label for="taskdescription" class="form-label">Task Description</label>
+            <textarea rows="6" class="form-control" id="taskdescription" placeholder="Task Description"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-start">
+          <button type="button" class="btn btn-secondary  rounded-pill" data-bs-dismiss="modal" >Close</button>
+          <button
+                  type="button"
+                  class="btn btn-primary rounded-pill"
+                  data-bs-dismiss="modal"
+                  onclick="saveChnages()">
+                  Save changes
+                </button>
+        </div>
+      </div>
+    </div>
+  </div>
     <!--navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div class="container-fluid">
