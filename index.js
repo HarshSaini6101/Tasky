@@ -111,11 +111,11 @@ const saveEditchanges = (event) => {
     const tagname = event.target.tagName;
 
     let parentElement;
-    if(tagname === "Button"){
+    if(tagname === "BUTTON"){
         parentElement =  event.target.parentNode.parentNode;
     }
     else{
-       parentElement = event.target.parentNode.parentNode.parentNode
+       parentElement = event.target.parentNode.parentNode.parentNode;
     }
     let taskTitle = parentElement.childNodes[5].childNodes[1];
     let taskDescription = parentElement.childNodes[5].childNodes[3];
@@ -131,13 +131,13 @@ const saveEditchanges = (event) => {
         if (task.id === targetID) {
             return {
                 id: task.id,
-                imageurl: task.imageurl,
+                imageUrl: task.imageUrl,
                 taskTitle: updateData.taskTitle,
                 taskType: updateData.taskType,
                 taskDescription: updateData.taskDescription,
             };
         }
-        return;
+        return task;
     });
     updateLocalStorage(); 
 };
