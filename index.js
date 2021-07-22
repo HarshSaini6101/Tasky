@@ -3,7 +3,7 @@ console.log(taskContainer);
 
 let globalStore = [];
 
-const newCard = ({
+const newcard = ({
     id,
     imageurl,
     tasktitle,
@@ -34,7 +34,7 @@ const loadInitialTaskCards = () => {
     const { cards } = JSON.parse(getInitialData);
 
     cards.map((cardObject) => {
-    const createNewCard = newCard(cardObject);
+    const createNewCard = newcard(cardObject);
     taskContainer.insertAdjacentHTML("beforeend", createNewCard);
     globalStore.push(cardObject);
 });
@@ -52,7 +52,7 @@ const saveChanges = () => {
         taskdescription: document.getElementById("taskdescription").value,
     };
 
-    const createNewCard = newCard(taskdata);
+    const createNewCard = newcard(taskdata);
 
     taskContainer.insertAdjacentHTML("beforeend", createNewCard);
     globalStore.push(taskdata);
