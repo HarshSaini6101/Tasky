@@ -3,7 +3,7 @@ console.log(taskContainer);
 
 let globalStore = [];
 
-const newcard = ({
+const newCard = ({
     id,
     imageurl,
     tasktitle,
@@ -14,8 +14,8 @@ const newcard = ({
     <div class="card-header d-flex justify-content-end gap-2 ">
         <button type="button" id=${id} class="btn btn-outline-success rounded" onclick="editCard.apply(this, arguments)"><i class="fas fa-pencil-alt" id=${id} onclick="editCard.apply(this, arguments)"></i></button>
         <button type="button" id=${id} class="btn btn-outline-danger rounded" onclick="deleteCard.apply(this, arguments)"><i class="far fa-trash-alt" id=${id} onclick="deleteCard.apply(this, arguments)"></i></button>
-    </div>
-        <img src=${imageurl} class="card-img-top" alt="...">
+        </div>
+        <img src=${imageurl} class="card-img-top" alt="..."/>
         <div class="card-body">
           <h5 class="card-title">${tasktitle}</h5>
           <p class="card-text">${taskdescription}</p>
@@ -24,7 +24,7 @@ const newcard = ({
     <div class="card-footer text-muted ">
         <button type="button" id=${id} class="btn btn-outline-primary float-end rounded-pill">Open Task</button>
     </div>
-  </div> 
+  </div>
 </div>`;
  
 const loadInitialTaskCards = () => {
@@ -34,7 +34,7 @@ const loadInitialTaskCards = () => {
     const { cards } = JSON.parse(getInitialData);
 
     cards.map((cardObject) => {
-    const createNewCard = newcard(cardObject);
+    const createNewCard = newCard(cardObject);
     taskContainer.insertAdjacentHTML("beforeend", createNewCard);
     globalStore.push(cardObject);
 });
@@ -43,7 +43,7 @@ const loadInitialTaskCards = () => {
 
 const updateLocalStorage = () => localStorage.setItem("tasky", JSON.stringify({cards: globalStore }));
 
-const saveChnages = () => {
+const saveChanges = () => {
     const taskdata = {
         id:`${Date.now()}`, //unique number for cards id
         imageurl: document.getElementById("imageurl").value,
@@ -52,7 +52,7 @@ const saveChnages = () => {
         taskdescription: document.getElementById("taskdescription").value,
     };
 
-    const createNewCard = newcard(taskdata);
+    const createNewCard = newCard(taskdata);
 
     taskContainer.insertAdjacentHTML("beforeend", createNewCard);
     globalStore.push(taskdata);
@@ -72,12 +72,12 @@ const deleteCard = (event) => {
   
     updateLocalStorage();
 
-        if(tagname === "Button"){
+        if(tagname === "BUTTON"){
             return taskContainer.removeChild(
             event.target.parentNode.parentNode.parentNode);
         }
             return taskContainer.removeChild(
-            event.target.parentNode.parentNode.parentNode.parentNode
+            event.target.parentNode.parentNode.parentNode
             );
 };
 
@@ -87,11 +87,11 @@ const editCard = (event) => {
     const tagname = event.target.tagName;
 
     let parentElement;
-    if(tagname === "Button"){
+    if(tagname === "BUTTON"){
         parentElement =  event.target.parentNode.parentNode;
     }
     else{
-       parentElement = event.target.parentNode.parentNode.parentNode
+       parentElement = event.target.parentNode.parentNode;
     }
     let taskTitle = parentElement.childNodes[5].childNodes[1];
     let taskDescription = parentElement.childNodes[5].childNodes[3];
@@ -102,7 +102,7 @@ const editCard = (event) => {
     taskDescription.setAttribute("contenteditable", "true");
     taskType.setAttribute("contenteditable", "true");
     submitButton.setAttribute("onclick", "saveEditchanges.apply(this, arguments)");
-    submitButton.innerHTML = "Save Changes" ;
+    submitButton.innerHTML = "Save Changes";
 };
 
 const saveEditchanges = (event) => {
@@ -140,4 +140,9 @@ const saveEditchanges = (event) => {
         return task;
     });
     updateLocalStorage(); 
-};
+    taskTitle.setAttribute("contenteditable", "false");
+    taskDescription.setAttribute("contenteditable", "false");
+    taskType.setAttribute("contenteditable", "false");
+    submitButton.removeAttribute("onclick");
+    submitButton.innerHTML = "Open Task";
+};   
